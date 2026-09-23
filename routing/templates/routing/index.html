@@ -20,11 +20,11 @@
       <form id="route-form" class="planner" autocomplete="off">
         <label class="field">
           <span>Start</span>
-          <input id="start" name="start" type="text" required placeholder="Chicago, IL" value="Chicago, IL">
+          <input id="start" name="start" type="text" required placeholder="Start typing a city…" value="" autocomplete="off">
         </label>
         <label class="field">
           <span>Finish</span>
-          <input id="finish" name="finish" type="text" required placeholder="Dallas, TX" value="Dallas, TX">
+          <input id="finish" name="finish" type="text" required placeholder="Start typing a city…" value="" autocomplete="off">
         </label>
         <button type="submit" id="submit-btn" class="go">
           <span class="go-label">Show route</span>
@@ -32,6 +32,9 @@
         </button>
       </form>
       <p id="form-error" class="form-error" role="alert" hidden></p>
+      {% if not google_maps_api_key %}
+      <p class="places-hint">Set <code>GOOGLE_MAPS_API_KEY</code> in <code>.env</code> to enable place suggestions.</p>
+      {% endif %}
     </header>
 
     <section class="map-plane" aria-label="Route map">
@@ -65,5 +68,12 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="{% static 'routing/js/app.js' %}"></script>
+  {% if google_maps_api_key %}
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&libraries=places&callback=initGooglePlaces"
+    async
+    defer
+  ></script>
+  {% endif %}
 </body>
 </html>

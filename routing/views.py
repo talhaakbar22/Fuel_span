@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -25,6 +26,7 @@ def home(request):
         {
             "max_range_miles": int(MAX_RANGE_MILES),
             "mpg": int(MPG),
+            "google_maps_api_key": settings.GOOGLE_MAPS_API_KEY,
         },
     )
 

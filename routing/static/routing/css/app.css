@@ -124,6 +124,60 @@ body::before {
   box-shadow: 0 0 0 3px rgba(31, 107, 92, 0.18);
 }
 
+.places-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.places-hint code {
+  font-size: 0.8em;
+  background: rgba(20, 32, 28, 0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+/* Google Places dropdown */
+.pac-container {
+  z-index: 10000 !important;
+  margin-top: 4px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  box-shadow: 0 12px 28px rgba(20, 32, 28, 0.14);
+  font-family: var(--font-body);
+  background: #f7faf8;
+}
+
+.pac-item {
+  padding: 0.65rem 0.85rem;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.pac-item:first-child {
+  border-top: 0;
+}
+
+.pac-item:hover,
+.pac-item-selected {
+  background: rgba(31, 107, 92, 0.1);
+}
+
+.pac-item-query {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pac-matched {
+  font-weight: 700;
+}
+
+.pac-icon {
+  margin-top: 3px;
+}
+
 .go {
   appearance: none;
   border: 0;

@@ -179,4 +179,30 @@
       setLoading(false);
     }
   });
+
+  function attachPlacesAutocomplete(input) {
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      componentRestrictions: { country: "us" },
+      fields: ["formatted_address", "name"],
+      types: ["(cities)"],
+    });
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      if (place.formatted_address) {
+        input.value = place.formatted_address;
+      } else if (place.name) {
+        input.value = place.name;
+      }
+    });
+  }
+
+  window.initGooglePlaces = () => {
+    if (!window.google?.maps?.places) return;
+    attachPlacesAutocomplete(startInput);
+    attachPlacesAutocomplete(finishInput);
+  };
+
+  if (window.google?.maps?.places) {
+    window.initGooglePlaces();
+  }
 })();

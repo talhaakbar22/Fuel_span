@@ -32,6 +32,17 @@ python manage.py load_fuel_stations --flush
 python manage.py runserver
 ```
 
+### Google Places autocomplete (Start / Finish)
+
+1. Create a key in [Google Cloud Console](https://console.cloud.google.com/) with **Maps JavaScript API** and **Places API** enabled.
+2. Copy `.env.example` to `.env` and set:
+
+```bash
+GOOGLE_MAPS_API_KEY=your_key_here
+```
+
+3. Restart `runserver`. Typing in Start/Finish will show USA city suggestions.
+
 ## UI
 
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) — enter start/finish, see the route on the map with fuel-stop markers, plus distance, drive time, and estimated fuel cost.
