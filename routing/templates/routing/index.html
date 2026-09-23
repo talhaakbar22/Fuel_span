@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FuelSpan — USA route &amp; optimal fuel stops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="{% static 'routing/css/app.css' %}">
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <p class="brand">FuelSpan</p>
+      <p class="lede">Enter two USA places. We draw the drive, mark cost-effective fuel stops ({{ max_range_miles }}&nbsp;mi range · {{ mpg }}&nbsp;MPG), and total the fuel bill.</p>
+
+      <form id="route-form" class="planner" autocomplete="off">
+        <label class="field">
+          <span>Start</span>
+          <input id="start" name="start" type="text" required placeholder="Chicago, IL" value="Chicago, IL">
+        </label>
+        <label class="field">
+          <span>Finish</span>
+          <input id="finish" name="finish" type="text" required placeholder="Dallas, TX" value="Dallas, TX">
+        </label>
+        <button type="submit" id="submit-btn" class="go">
+          <span class="go-label">Show route</span>
+          <span class="go-wait" hidden>Planning…</span>
+        </button>
+      </form>
+      <p id="form-error" class="form-error" role="alert" hidden></p>
+    </header>
+
+    <section class="map-plane" aria-label="Route map">
+      <div id="map" role="presentation"></div>
+      <p id="map-hint" class="map-hint">Route and fuel stops appear here after you plan.</p>
+    </section>
+
+    <section id="results" class="results" hidden>
+      <div class="metrics">
+        <div class="metric" style="--i:0">
+          <p class="metric-label">Distance</p>
+          <p class="metric-value" id="metric-distance">—</p>
+        </div>
+        <div class="metric" style="--i:1">
+          <p class="metric-label">Drive time</p>
+          <p class="metric-value" id="metric-duration">—</p>
+        </div>
+        <div class="metric" style="--i:2">
+          <p class="metric-label">Estimated fuel cost</p>
+          <p class="metric-value" id="metric-cost">—</p>
+        </div>
+      </div>
+
+      <div class="stops-block">
+        <h2 class="stops-title">Optimal fuel stops</h2>
+        <p class="stops-sub" id="stops-sub"></p>
+        <ol id="stops-list" class="stops-list"></ol>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="{% static 'routing/js/app.js' %}"></script>
+</body>
+</html>
